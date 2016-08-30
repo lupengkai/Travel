@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <constant name="struts.custom.i18n.resources" value="GBK"/>
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index"></default-action-ref>
+
+        <action name="index">
+            <result>/WEB-INF/index.jsp</result>
+        </action>
+
+        <action name="login">
+            <result>/WEB-INF/login_input.jsp</result>
+        </action>
+
+
+        <action name="login_in" class="com.travel.action.LoginAction">
+            <result name="success" type="redirectAction">index</result>
+            <result name="error" type="redirectAction">login</result>
+        </action>
+
+
+        <action name="register" class="com.travel.action.RegisterInputAction">
+            <result>/WEB-INF/register_input.jsp</result>
+        </action>
+
+
+        <action name="register_confirm" class="com.travel.action.RegisterAction">
+            <result name="success" type="redirectAction">login</result>
+            <result name="error" type="redirectAction">register</result>
+            <result name="input">/WEB-INF/index.jsp</result>
+        </action>
+
+       <!-- <action name="Login_input">
+            <result>/Login_input.jsp</result>
+        </action>
+
+        <action name="Login_login" class="com.fastrepair.action.StaffLoginAction" method="login">
+            <result name="success">/admin.jsp</result>
+            <result name="fail">/Login_fail.jsp</result>
+        </action>
+
+
+        <action name="Login_register_register" class="com.fastrepair.action.StaffRegisterAction">
+            <result name="success">/registerOk.jsp</result>
+            <result name="fail">/registerFail.jsp</result>
+        </action>
+
+        <action name="Login_register_input" class="com.fastrepair.action.StaffRegisterInputAction">
+            <result>/Staff_register_input.jsp</result>
+        </action>
+
+        <action name="Staff_info" class="com.fastrepair.action.StaffInfoAction">
+            <result name="success">/Staff_info.jsp</result>
+        </action>
+
+
+        <action name="Login_admin_input">
+            <result>
+                /admin/Login_input.jsp
+            </result>
+        </action>
+
+        <action name="Login_admin_login" class="com.fastrepair.action.AdminLoginAction">
+            <result name="success">/admin/admin.jsp</result>
+            <result name="fail">/admin/Login_input.jsp</result>
+        </action>-->
+    </package>
+
+
+    <!--<package name="ETMS" namespace="/ETMS" extends="struts-default">
+        <action name="Expensivetools_show" class="com.fastrepair.action.StaffToolsListAction" method="expensive">
+            <result>
+                /ExpensiveTools_show.jsp
+            </result>
+        </action>
+        <action name="Inexpensivetools_show" class="com.fastrepair.action.StaffToolsListAction" method="inexpensive">
+            <result>
+                /InexpensiveTools_show.jsp
+            </result>
+        </action>
+        <action name="Expensivetools_request" class="com.fastrepair.action.ExpensiveToolsRequestAction">
+            <result>
+                /Expensivetools_request.jsp
+            </result>
+        </action>
+
+        <action name="request" class="com.fastrepair.action.RaiseRequestAction">
+            <result name="success">
+                /Request_ok.jsp
+            </result>
+            <result name="error">
+                /Request_error.jsp
+            </result>
+        </action>
+        <action name="cancellation" class="com.fastrepair.action.ToolCancellationAction">
+            <result>
+                /Delete_ok.jsp
+            </result>
+        </action>
+    </package>
+
+
+    <package name="ETMSRecord" namespace="/ETMS/record" extends="struts-default">
+        <action name="*" class="com.fastrepair.action.StaffRecordShow" method="{1}">
+            <result>/Recorder_show.jsp</result>
+        </action>
+    </package>
+
+    <package name="WMS" namespace="/WMS" extends="struts-default">
+
+        <action name="tools" class="com.fastrepair.action.ToolsListAction">
+            <result>
+                /admin/tools_list.jsp
+            </result>
+        </action>
+
+
+        <action name="tools_add_input" class="com.fastrepair.action.ToolAddInputAction">
+            <result>
+                /admin/tools_add_input.jsp
+            </result>
+        </action>
+
+        <action name="tools_add" class="com.fastrepair.action.ToolAddAction">
+            <result>
+                /admin/tools_add_ok.jsp
+            </result>
+        </action>
+        <action name="tools_register" class="com.fastrepair.action.ToolOutAction" method="register">
+            <result>/admin/OK.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="tools_lend" class="com.fastrepair.action.ToolOutAction" method="lend">
+            <result>/admin/OK.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+
+    </package>
+    <package name="WMSManage" namespace="/WMS/manage" extends="struts-default">
+        <action name="*" class="com.fastrepair.action.ToolManageAction" method="{1}">
+            <result>/admin/{1}.jsp</result>
+        </action>
+    </package>
+-->
+
+</struts>

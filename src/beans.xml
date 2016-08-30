@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:annotation-config/>
+    <context:component-scan base-package="com.travel"/>
+    <aop:aspectj-autoproxy/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"><!--处理占位符-->
+        <property name="locations" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <bean id="dataSource" destroy-method="close"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan">    <!-- hibernate map-->
+            <list>
+                <value>com.travel.model</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean name="userDao" class="com.travel.dao.UserDao"></bean>
+<bean name="userManager" class="com.travel.service.UserManager"></bean>
+
+    <bean name="DocumentTypeDao" class="com.travel.dao.DocumentTypeDao"></bean>
+    <bean name="documentTypeManager" class="com.travel.service.DocumentTypeManager"></bean>
+
+
+
+
+ 
+
+
+
+
+
+    <aop:config>
+
+        <aop:pointcut id="businessService"
+                      expression="execution(public * com.travel.service.*.*(..))"></aop:pointcut>
+        <aop:advisor pointcut-ref="businessService" advice-ref="txAdvice"/>
+
+    </aop:config>
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+
+            <tx:method name="*" propagation="REQUIRED"/>
+
+        </tx:attributes>
+    </tx:advice>
+</beans>
+
