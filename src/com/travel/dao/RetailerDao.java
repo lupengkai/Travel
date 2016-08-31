@@ -1,15 +1,16 @@
 package com.travel.dao;
 
-import com.travel.model.User;
+
+import com.travel.model.Retailer;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by tage on 8/30/16.
+ * Created by tage on 8/31/16.
  */
-public class UserDao {
+public class RetailerDao {
     HibernateTemplate hibernateTemplate;
 
     public HibernateTemplate getHibernateTemplate() {
@@ -23,19 +24,15 @@ public class UserDao {
     }
 
 
+    public Retailer loadById(int id) {
 
-    public User loadByName(String name) {
-        List<User> users = (List<User>)hibernateTemplate.find("from User u where u.name = ?", name);
-        if (users.size()!=0) {
-            return users.get(0);
+        List<Retailer> retailers = (List<Retailer>) hibernateTemplate.find("from Retailer r where s.id = ?", id);
+
+        if (retailers.size() != 0) {
+            return retailers.get(0);
         }
         return null;
     }
-
-    public void save(User user) {
-        hibernateTemplate.save(user);
-    }
-
 
 
 }

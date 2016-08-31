@@ -42,7 +42,7 @@
 </div>
 
 
-<form action="<s:url action="register_confirm"></s:url> " method="post">
+<form action="<s:url action="register_confirm" namespace="/"></s:url> " method="post">
 
     用户名: <input type="text" name="name"> <br/>
     密码:<input type="password" name="password1"><br/>

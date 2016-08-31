@@ -41,117 +41,83 @@
             <result name="input">/WEB-INF/index.jsp</result>
         </action>
 
-       <!-- <action name="Login_input">
-            <result>/Login_input.jsp</result>
-        </action>
 
-        <action name="Login_login" class="com.fastrepair.action.StaffLoginAction" method="login">
-            <result name="success">/admin.jsp</result>
-            <result name="fail">/Login_fail.jsp</result>
-        </action>
-
-
-        <action name="Login_register_register" class="com.fastrepair.action.StaffRegisterAction">
-            <result name="success">/registerOk.jsp</result>
-            <result name="fail">/registerFail.jsp</result>
-        </action>
-
-        <action name="Login_register_input" class="com.fastrepair.action.StaffRegisterInputAction">
-            <result>/Staff_register_input.jsp</result>
-        </action>
-
-        <action name="Staff_info" class="com.fastrepair.action.StaffInfoAction">
-            <result name="success">/Staff_info.jsp</result>
-        </action>
-
-
-        <action name="Login_admin_input">
-            <result>
-                /admin/Login_input.jsp
-            </result>
-        </action>
-
-        <action name="Login_admin_login" class="com.fastrepair.action.AdminLoginAction">
-            <result name="success">/admin/admin.jsp</result>
-            <result name="fail">/admin/Login_input.jsp</result>
-        </action>-->
     </package>
 
 
-    <!--<package name="ETMS" namespace="/ETMS" extends="struts-default">
-        <action name="Expensivetools_show" class="com.fastrepair.action.StaffToolsListAction" method="expensive">
-            <result>
-                /ExpensiveTools_show.jsp
-            </result>
-        </action>
-        <action name="Inexpensivetools_show" class="com.fastrepair.action.StaffToolsListAction" method="inexpensive">
-            <result>
-                /InexpensiveTools_show.jsp
-            </result>
-        </action>
-        <action name="Expensivetools_request" class="com.fastrepair.action.ExpensiveToolsRequestAction">
-            <result>
-                /Expensivetools_request.jsp
-            </result>
+    <package name="scenery" namespace="/scenery" extends="struts-default">
+        <action name="all" class="com.travel.action.scenery.SceneryListAction">
+            <result>/WEB-INF/scenery/scenery_list.jsp</result>
         </action>
 
-        <action name="request" class="com.fastrepair.action.RaiseRequestAction">
+        <action name="detail" class="com.travel.action.scenery.SceneryDetailAction">
+            <result>/WEB-INF/scenery/scenery_detail.jsp</result>
+        </action>
+
+    </package>
+
+
+    <package name="holiday" namespace="/holiday" extends="struts-default">
+        <action name="all" class="com.travel.action.holiday.HolidayListAction">
+            <result>/WEB-INF/holiday/holiday_list.jsp</result>
+        </action>
+
+        <action name="detail" class="com.travel.action.holiday.HolidayDetailAction">
+            <result>/WEB-INF/holiday/holiday_detail.jsp</result>
+        </action>
+
+        <action name="in" class="com.travel.action.holiday.HolidayAction" method="{1}">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/holiday</param>
+                <param name="actionName">detail</param>
+            </result>
+
+            <result name="login" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">login</param>
+            </result>
+        </action>
+    </package>
+
+
+    <package name="order" namespace="/order" extends="struts-default">
+        <action name="all" class="com.travel.action.order.OrderListAction">
             <result name="success">
-                /Request_ok.jsp
+                /WEB-INF/order/OrderList.jsp
             </result>
-            <result name="error">
-                /Request_error.jsp
-            </result>
-        </action>
-        <action name="cancellation" class="com.fastrepair.action.ToolCancellationAction">
-            <result>
-                /Delete_ok.jsp
+            <result name="login" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">login</param>
             </result>
         </action>
     </package>
 
 
-    <package name="ETMSRecord" namespace="/ETMS/record" extends="struts-default">
-        <action name="*" class="com.fastrepair.action.StaffRecordShow" method="{1}">
-            <result>/Recorder_show.jsp</result>
+    <package name="admin" namespace="/admin" extends="struts-default">
+        <action name="login">
+            <result>/WEB-INF/admin/login_input.jsp</result>
+        </action>
+
+        <action name="login_in" class="com.travel.action.AdminLoginAction">
+            <result name="success">
+                /WEB-INF/admin/index.jsp
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin</param>
+                <param name="actionName">login</param>
+            </result>
         </action>
     </package>
 
-    <package name="WMS" namespace="/WMS" extends="struts-default">
 
-        <action name="tools" class="com.fastrepair.action.ToolsListAction">
-            <result>
-                /admin/tools_list.jsp
-            </result>
-        </action>
-
-
-        <action name="tools_add_input" class="com.fastrepair.action.ToolAddInputAction">
-            <result>
-                /admin/tools_add_input.jsp
-            </result>
-        </action>
-
-        <action name="tools_add" class="com.fastrepair.action.ToolAddAction">
-            <result>
-                /admin/tools_add_ok.jsp
-            </result>
-        </action>
-        <action name="tools_register" class="com.fastrepair.action.ToolOutAction" method="register">
-            <result>/admin/OK.jsp</result>
-            <result name="error">/admin/error.jsp</result>
-        </action>
-        <action name="tools_lend" class="com.fastrepair.action.ToolOutAction" method="lend">
-            <result>/admin/OK.jsp</result>
-            <result name="error">/admin/error.jsp</result>
-        </action>
+    <package name="scenery_admin" namespace="/admin/scenery" extends="struts-default">
 
     </package>
-    <package name="WMSManage" namespace="/WMS/manage" extends="struts-default">
-        <action name="*" class="com.fastrepair.action.ToolManageAction" method="{1}">
-            <result>/admin/{1}.jsp</result>
-        </action>
+
+
+    <package name="holiday_admin" namespace="/admin/holiday" extends="struts-default">
+
     </package>
--->
+
 
 </struts>

@@ -56,7 +56,15 @@ public class RegisterAction  extends ActionSupport implements ModelDriven{
     public String execute() throws Exception {
         User user = null;
         HttpServletRequest request = ServletActionContext.getRequest();
-        if (userManager.exists(registerInfo.getName())) {
+        if (registerInfo.getName() == null || registerInfo.getName().trim().equals("")) {
+
+            request.getSession().setAttribute("error_message", "Username is empty");
+            return ERROR;
+
+        } else if (registerInfo.getPassword1() == null || registerInfo.getPassword1().trim().equals("")) {
+            request.getSession().setAttribute("error_message", "Password is Empty.");
+            return ERROR;
+        } else if (userManager.exists(registerInfo.getName())) {
 
             request.getSession().setAttribute("error_message", "Username already exists.");
             return ERROR;

@@ -1,5 +1,6 @@
 package com.travel.dao;
 
+import com.travel.model.Admin;
 import com.travel.model.User;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
@@ -7,9 +8,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by tage on 8/30/16.
+ * Created by tage on 8/31/16.
  */
-public class UserDao {
+public class AdminDao {
     HibernateTemplate hibernateTemplate;
 
     public HibernateTemplate getHibernateTemplate() {
@@ -23,19 +24,11 @@ public class UserDao {
     }
 
 
-
-    public User loadByName(String name) {
-        List<User> users = (List<User>)hibernateTemplate.find("from User u where u.name = ?", name);
-        if (users.size()!=0) {
-            return users.get(0);
+    public Admin loadByName(String name) {
+        List<Admin> admins = (List<Admin>) hibernateTemplate.find("from Admin ad where ad.name = ?", name);
+        if (admins.size() != 0) {
+            return admins.get(0);
         }
         return null;
     }
-
-    public void save(User user) {
-        hibernateTemplate.save(user);
-    }
-
-
-
 }

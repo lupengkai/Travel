@@ -65,13 +65,21 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean name="DocumentTypeDao" class="com.travel.dao.DocumentTypeDao"></bean>
     <bean name="documentTypeManager" class="com.travel.service.DocumentTypeManager"></bean>
 
+    <bean name="adminDao" class="com.travel.dao.AdminDao"></bean>
+    <bean name="adminManager" class="com.travel.service.AdminManager"></bean>
+
+    <bean name="sceneryDao" class="com.travel.dao.SceneryDao"></bean>
+    <bean name="sceneryManager" class="com.travel.service.SceneryManager"></bean>
 
 
+    <bean name="holidayDao" class="com.travel.dao.HolidayDao"></bean>
+    <bean name="holidayManager" class="com.travel.service.HolidayManager"></bean>
 
- 
+    <bean name="orderItemDao" class="com.travel.dao.OrderItemDao"></bean>
+    <bean name="orderItemManager" class="com.travel.service.OrderItemManager"></bean>
 
-
-
+    <bean name="retailerDao" class="com.travel.dao.RetailerDao"></bean>
+    <bean name="retailerManager" class="com.travel.service.RetailerManager"></bean>
 
 
     <aop:config>

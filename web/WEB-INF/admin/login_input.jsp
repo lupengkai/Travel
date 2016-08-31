@@ -31,8 +31,6 @@
 </head>
 
 <body>
-
-
 <div>
 
     <s:property value="#session.error_message"></s:property>
@@ -40,16 +38,13 @@
 
 
 </div>
-<form action="<s:url action="login_in" namespace="/"></s:url>" method="post">
-    用户名:<input type="text" name="username">
+<form action="<s:url action="login_in" namespace="/admin"></s:url>" method="post">
+    用户名:<input type="text" name="name">
     密码:<input type="password" name="password">
     <input type="submit" value="登陆">
 
 
 </form>
-
-
-
 
 </body>
 </html>

@@ -10,3 +10,5 @@ INSERT INTO NewsType VALUES (NULL, "景点新闻");
 INSERT INTO NewsType VALUES (NULL, "旅游新闻");
 INSERT INTO NewsType VALUES (NULL, "火爆新闻");
 INSERT INTO NewsType VALUES (NULL, "其他新闻");
+
+INSERT INTO Admin VALUES (NULL, "admin", "admin");

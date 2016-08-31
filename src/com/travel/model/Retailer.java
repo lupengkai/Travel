@@ -2,7 +2,9 @@ package com.travel.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,6 +17,7 @@ public class Retailer {
     private String location;
     private Timestamp joinTime;
     private Set<Holiday> holidays = new HashSet();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
 
     @Id
@@ -64,5 +67,15 @@ public class Retailer {
 
     public void setHolidays(Set<Holiday> holidays) {
         this.holidays = holidays;
+    }
+
+
+    @OneToMany(mappedBy = "retailer")
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }

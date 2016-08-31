@@ -57,6 +57,10 @@ public class UserManager  {
         userDao.save(user);
     }
 
+    public User loadByName(String name) {
+        return userDao.loadByName(name);
+    }
+
 
 
 

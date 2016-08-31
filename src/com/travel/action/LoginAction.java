@@ -46,9 +46,11 @@ public class LoginAction  extends ActionSupport implements ModelDriven{
         HttpServletRequest request = ServletActionContext.getRequest();
         try {
             userManager.validate(loginInfo);
-            User user = new User();
+
+            User user = userManager.loadByName(loginInfo.getUsername());
 
 
+            request.getSession().setAttribute("user", user);
 
         } catch (PasswordErrorException e) {
             request.getSession().setAttribute("error_message", "The password is error!");
@@ -57,10 +59,7 @@ public class LoginAction  extends ActionSupport implements ModelDriven{
             request.getSession().setAttribute("error_message", "User not found");
             return ERROR;
         }
-            User user = new User();
-            user.setName(loginInfo.getUsername());
 
-            request.getSession().setAttribute("user", user);
           return SUCCESS;
 
 

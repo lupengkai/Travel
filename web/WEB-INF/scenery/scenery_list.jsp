@@ -1,4 +1,3 @@
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: tage
@@ -31,25 +30,9 @@
 </head>
 
 <body>
+<h1>
 
 
-<div>
-
-    <s:property value="#session.error_message"></s:property>
-    <s:set var="error_message" value="" scope="session"/>
-
-
-</div>
-<form action="<s:url action="login_in" namespace="/"></s:url>" method="post">
-    用户名:<input type="text" name="username">
-    密码:<input type="password" name="password">
-    <input type="submit" value="登陆">
-
-
-</form>
-
-
-
-
+</h1>
 </body>
 </html>

@@ -2,7 +2,9 @@ package com.travel.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,9 +25,11 @@ public class User {
     private String location_coun;
     private DocumentType documentType;
     private String ID_number;
-/*    private Set<Holiday> holidays = new HashSet<>();*/
+    /*    private Set<holiday> holidays = new HashSet<>();*/
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-@Id
+
+    @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
@@ -136,11 +140,21 @@ public class User {
 
 
   /*  @ManyToMany(mappedBy = "users")
-    public Set<Holiday> getHolidays() {
+    public Set<holiday> getHolidays() {
         return holidays;
     }
 
-    public void setHolidays(Set<Holiday> holidays) {
+    public void setHolidays(Set<holiday> holidays) {
         this.holidays = holidays;
     }*/
+
+
+    @OneToMany(mappedBy = "user")
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 }

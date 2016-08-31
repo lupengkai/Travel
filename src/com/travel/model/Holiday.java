@@ -2,10 +2,7 @@ package com.travel.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tage on 8/30/16.
@@ -22,8 +19,9 @@ public class Holiday {
     private Timestamp timestamp;
     private String traffic;
     private int days;
-    private String explaination;
-    private List<Scenery> secenery = new LinkedList<>();
+    private String explanation;
+    private List<Scenery> sceneries = new LinkedList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
 
 
@@ -35,16 +33,13 @@ public class Holiday {
             joinColumns = {@JoinColumn(name = "holiday_id")},
             inverseJoinColumns = {@JoinColumn(name = "scenery_id")}
     )
-    public List<Scenery> getSecenery() {
-        return secenery;
+    public List<Scenery> getSceneries() {
+        return sceneries;
     }
 
-    public void setSecenery(List<Scenery> secenery) {
-        this.secenery = secenery;
+    public void setSceneries(List<Scenery> sceneries) {
+        this.sceneries = sceneries;
     }
-
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -120,15 +115,28 @@ public class Holiday {
         this.days = days;
     }
 
-    public String getExplaination() {
-        return explaination;
+    public String getExplanation() {
+        return explanation;
     }
 
-    public void setExplaination(String explaination) {
-        this.explaination = explaination;
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
-/*    @ManyToMany
+
+    @OneToMany(mappedBy = "holiday")
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+
+
+
+    /*    @ManyToMany
     @JoinTable(name = "participation",
             joinColumns = {@JoinColumn(name = "holiday_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})

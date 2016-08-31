@@ -1,6 +1,6 @@
 package com.travel.dao;
 
-import com.travel.model.User;
+import com.travel.model.SceneryType;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import javax.annotation.Resource;
@@ -9,13 +9,12 @@ import java.util.List;
 /**
  * Created by tage on 8/30/16.
  */
-public class UserDao {
-    HibernateTemplate hibernateTemplate;
+public class SceneryTypeDao {
+    private HibernateTemplate hibernateTemplate;
 
     public HibernateTemplate getHibernateTemplate() {
         return hibernateTemplate;
     }
-
 
     @Resource
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
@@ -23,19 +22,12 @@ public class UserDao {
     }
 
 
-
-    public User loadByName(String name) {
-        List<User> users = (List<User>)hibernateTemplate.find("from User u where u.name = ?", name);
-        if (users.size()!=0) {
-            return users.get(0);
-        }
-        return null;
+    public SceneryType loadById(int id) {
+        return ((List<SceneryType>) hibernateTemplate.find("from SceneryType sl where sl.id = ?", id)).get(0);
     }
 
-    public void save(User user) {
-        hibernateTemplate.save(user);
+    public List<SceneryType> getAll() {
+        return (List<SceneryType>) hibernateTemplate.find("from SceneryType sl ");
     }
-
-
 
 }
