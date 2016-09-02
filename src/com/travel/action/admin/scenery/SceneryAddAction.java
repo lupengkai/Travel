@@ -9,6 +9,9 @@ import com.travel.service.SceneryLevelManager;
 import com.travel.service.SceneryManager;
 import com.travel.service.SceneryTypeManager;
 import com.travel.vo.SceneryInfo;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by tage on 8/31/16.
@@ -63,29 +66,38 @@ public class SceneryAddAction extends ActionSupport implements ModelDriven {
 
     public String execute() {
 
-        Scenery scenery = new Scenery();
-        scenery.setName(sceneryInfo.getName());
-        scenery.setCity(sceneryInfo.getCity());
-        scenery.setProv(sceneryInfo.getProv());
-        scenery.setCoun(sceneryInfo.getCoun());
-        scenery.setPrice(sceneryInfo.getPrice());
 
-        SceneryType sceneryType = sceneryTypeManager.loadById(sceneryInfo.getTypeId());
-        scenery.setType(sceneryType);
-
-        SceneryLevel sceneryLevel = sceneryLevelManager.loadById(sceneryInfo.getLevelId());
+        if (sceneryInfo.getName() == null || sceneryInfo.getName().trim().equals("")) {
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.getSession().setAttribute("error_message", "name is empty");
+            return INPUT;
+        } else {
 
 
-        scenery.setLevel(sceneryLevel);
+            Scenery scenery = new Scenery();
+            scenery.setName(sceneryInfo.getName());
+            scenery.setCity(sceneryInfo.getCity());
+            scenery.setProv(sceneryInfo.getProv());
+            scenery.setCoun(sceneryInfo.getCoun());
+            scenery.setPrice(sceneryInfo.getPrice());
+
+            SceneryType sceneryType = sceneryTypeManager.loadById(sceneryInfo.getTypeId());
+            scenery.setType(sceneryType);
+
+            SceneryLevel sceneryLevel = sceneryLevelManager.loadById(sceneryInfo.getLevelId());
 
 
-        scenery.setIntroduction(sceneryInfo.getIntroduction());
-        scenery.setPhoto(sceneryInfo.getPhoto());
-
-        sceneryManager.add(scenery);
+            scenery.setLevel(sceneryLevel);
 
 
-        return SUCCESS;
+            scenery.setIntroduction(sceneryInfo.getIntroduction());
+            scenery.setPhoto(sceneryInfo.getPhoto());
+
+            sceneryManager.add(scenery);
+
+
+            return SUCCESS;
+        }
     }
 
 }

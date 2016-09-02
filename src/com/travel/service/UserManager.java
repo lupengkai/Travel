@@ -61,6 +61,13 @@ public class UserManager  {
         return userDao.loadByName(name);
     }
 
+    public User loadById(int id) {
+        return userDao.loadById(id);
+    }
+
+    public void update(User user) {
+        userDao.update(user);
+    }
 
 
 

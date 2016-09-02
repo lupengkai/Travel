@@ -9,6 +9,9 @@ import com.travel.service.SceneryLevelManager;
 import com.travel.service.SceneryManager;
 import com.travel.service.SceneryTypeManager;
 import com.travel.vo.SceneryInfo;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by tage on 8/31/16.
@@ -16,15 +19,7 @@ import com.travel.vo.SceneryInfo;
 public class SceneryUpdateAction extends ActionSupport implements ModelDriven {
 
     private SceneryInfo sceneryInfo = new SceneryInfo();
-    private int sceneryId;
 
-    public int getSceneryId() {
-        return sceneryId;
-    }
-
-    public void setSceneryId(int sceneryId) {
-        this.sceneryId = sceneryId;
-    }
 
     public SceneryInfo getSceneryInfo() {
         return sceneryInfo;
@@ -72,29 +67,40 @@ public class SceneryUpdateAction extends ActionSupport implements ModelDriven {
 
     public String execute() {
 
-        Scenery scenery = sceneryManager.loadById(sceneryId);
-        scenery.setName(sceneryInfo.getName());
-        scenery.setCity(sceneryInfo.getCity());
-        scenery.setProv(sceneryInfo.getProv());
-        scenery.setCoun(sceneryInfo.getCoun());
-        scenery.setPrice(sceneryInfo.getPrice());
+        Scenery scenery = sceneryManager.loadById(sceneryInfo.getId());
+        if (scenery == null) {
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.getSession().setAttribute("error_message", "not found");
 
-        SceneryType sceneryType = sceneryTypeManager.loadById(sceneryInfo.getTypeId());
-        scenery.setType(sceneryType);
+            return ERROR;
+        } else if (sceneryInfo.getName() == null || sceneryInfo.getName().trim().equals("")) {
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.getSession().setAttribute("error_message", "name is empty");
+            return INPUT;
+        } else {
+            scenery.setName(sceneryInfo.getName());
+            scenery.setCity(sceneryInfo.getCity());
+            scenery.setProv(sceneryInfo.getProv());
+            scenery.setCoun(sceneryInfo.getCoun());
+            scenery.setPrice(sceneryInfo.getPrice());
 
-        SceneryLevel sceneryLevel = sceneryLevelManager.loadById(sceneryInfo.getLevelId());
+            SceneryType sceneryType = sceneryTypeManager.loadById(sceneryInfo.getTypeId());
+            scenery.setType(sceneryType);
+
+            SceneryLevel sceneryLevel = sceneryLevelManager.loadById(sceneryInfo.getLevelId());
 
 
-        scenery.setLevel(sceneryLevel);
+            scenery.setLevel(sceneryLevel);
 
 
-        scenery.setIntroduction(sceneryInfo.getIntroduction());
-        scenery.setPhoto(sceneryInfo.getPhoto());
+            scenery.setIntroduction(sceneryInfo.getIntroduction());
+            scenery.setPhoto(sceneryInfo.getPhoto());
 
-        sceneryManager.update(scenery);
+            sceneryManager.update(scenery);
 
 
-        return SUCCESS;
+            return SUCCESS;
+        }
     }
 
 }

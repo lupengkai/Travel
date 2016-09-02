@@ -7,6 +7,7 @@ import com.travel.model.SceneryType;
  * Created by tage on 8/31/16.
  */
 public class SceneryInfo {
+    private int id;
     private String name;
     private String prov;
     private String city;
@@ -17,6 +18,13 @@ public class SceneryInfo {
     private String introduction;
     private String photo;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

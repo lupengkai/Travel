@@ -19,4 +19,16 @@ public class Route {
         sceneries.add(scenery);
     }
 
+
+    @Override
+    public String toString() {
+        String strRoute = "";
+
+        for (Scenery s : sceneries) {
+            strRoute = strRoute + " " + s.getName();
+        }
+
+
+        return strRoute;
+    }
 }

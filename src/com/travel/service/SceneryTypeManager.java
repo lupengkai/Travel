@@ -19,7 +19,7 @@ public class SceneryTypeManager {
     }
 
     @Resource
-    public void setSceneryTypeDao(SceneryTypeDao documentTypeDao) {
+    public void setSceneryTypeDao(SceneryTypeDao sceneryTypeDao) {
         this.sceneryTypeDao = sceneryTypeDao;
     }
 

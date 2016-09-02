@@ -2,6 +2,7 @@ package com.travel.service;
 
 import com.travel.dao.SceneryDao;
 import com.travel.model.Scenery;
+import com.travel.vo.SceneryInfo;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -44,4 +45,19 @@ public class SceneryManager {
     }
 
 
+    public SceneryInfo toSceneryInfo(Scenery scenery) {
+        SceneryInfo sceneryInfo = new SceneryInfo();
+        sceneryInfo.setId(scenery.getId());
+        sceneryInfo.setName(scenery.getName());
+        sceneryInfo.setIntroduction(scenery.getIntroduction());
+        sceneryInfo.setCity(scenery.getCity());
+        sceneryInfo.setPrice(scenery.getPrice());
+        sceneryInfo.setProv(scenery.getProv());
+        sceneryInfo.setCoun(scenery.getCoun());
+        sceneryInfo.setLevelId(scenery.getLevel().getId());
+        sceneryInfo.setTypeId(scenery.getType().getId());
+        sceneryInfo.setPhoto(scenery.getPhoto());
+        return sceneryInfo;
+
+    }
 }

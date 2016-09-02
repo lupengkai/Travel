@@ -37,5 +37,18 @@ public class UserDao {
     }
 
 
+    public User loadById(int id) {
 
+        List<User> users = (List<User>) hibernateTemplate.find("from User u where u.id = ?", id);
+
+        if (users.size() != 0) {
+            return users.get(0);
+        }
+        return null;
+    }
+
+    public void update(User user) {
+        hibernateTemplate.update(user);
+
+    }
 }

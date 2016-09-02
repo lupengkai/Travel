@@ -26,7 +26,7 @@ public class RetailerDao {
 
     public Retailer loadById(int id) {
 
-        List<Retailer> retailers = (List<Retailer>) hibernateTemplate.find("from Retailer r where s.id = ?", id);
+        List<Retailer> retailers = (List<Retailer>) hibernateTemplate.find("from Retailer r where r.id = ?", id);
 
         if (retailers.size() != 0) {
             return retailers.get(0);
@@ -35,4 +35,7 @@ public class RetailerDao {
     }
 
 
+    public List<Retailer> getAll() {
+        return (List<Retailer>) hibernateTemplate.find("from Retailer r ");
+    }
 }

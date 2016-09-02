@@ -26,13 +26,8 @@ timestamp:<s:property value="holiday.timestamp"></s:property><br/>
     <s:property value="name"></s:property>
 </s:iterator>
 
-<form action="<s:url namespace="/order" action="add"/>">
-    <input type="hidden" name="holiday_id" value="<s:property value="holiday.id"></s:property>">
-    <s:select list="retailers" name="retailer_id" theme="simple"
-              listKey="id" listValue="name">
-    </s:select><br/>
-    <input type="submit" value="Order">
-</form>
+
+<a href="<s:url namespace="/admin/holiday" action="update_input"></s:url>?holidayId=<s:property value="holiday.id"></s:property>">update</a>
 
 
 </body>

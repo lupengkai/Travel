@@ -81,6 +81,12 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean name="retailerDao" class="com.travel.dao.RetailerDao"></bean>
     <bean name="retailerManager" class="com.travel.service.RetailerManager"></bean>
 
+    <bean name="sceneryTypeDao" class="com.travel.dao.SceneryTypeDao"></bean>
+    <bean name="sceneryTypeManager" class="com.travel.service.SceneryTypeManager"></bean>
+
+    <bean name="sceneryLevelDao" class="com.travel.dao.SceneryLevelDao"></bean>
+    <bean name="sceneryLevelManager" class="com.travel.service.SceneryLevelManager"></bean>
+
 
     <aop:config>
 

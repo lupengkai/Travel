@@ -40,33 +40,43 @@
 
 </div>
 
-<table border="2">
-    <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>route</th>
-        <th>detail</th>
-    </tr>
-    <s:iterator value="allHolidays">
+
+<div>
+    <s:property value="#session.route"></s:property>
+
+
+</div>
+
+
+<table>
+    <th>
+    <td>id</td>
+    <td>name</td>
+    <td>detail</td>
+    <td>add</td>
+    </th>
+    <s:iterator value="allSceneries">
         <tr>
             <td>
                 <s:property value="id"></s:property>
             </td>
             <td>
-                <s:property value="theme"></s:property>
+                <s:property value="name"></s:property>
             </td>
             <td>
-                <s:iterator value="sceneries">
-                    <s:property value="name"></s:property>
-                </s:iterator>
-            <td>
-                <a href="<s:url namespace="/holiday" action="detail"></s:url>?holidayId=<s:property value="id"></s:property>">detail</a>
+                <a href="<s:url namespace="/admin/scenery" action="detail"></s:url>?sceneryId=<s:property value="id"></s:property>">detail</a>
             </td>
+
+            <td>
+                <a href="<s:url namespace="/admin/holiday/route" action="scenery_add"></s:url>?sceneryId=<s:property value="id"></s:property>">
+                    add
+
+                </a></td>
         </tr>
     </s:iterator>
 
 </table>
-
+<a href="<s:url namespace="/admin/holiday/route" action="confirm"></s:url>">确认</a>
 <s:debug></s:debug>
 </body>
 </html>

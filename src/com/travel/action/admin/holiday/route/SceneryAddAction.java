@@ -1,19 +1,19 @@
-package com.travel.action.admin.scenery;
+package com.travel.action.admin.holiday.route;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.model.Scenery;
 import com.travel.service.SceneryManager;
-import org.apache.struts2.ServletActionContext;
+import com.travel.session.Route;
 import org.apache.struts2.interceptor.SessionAware;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
- * Created by tage on 8/31/16.
+ * Created by tage on 9/2/16.
  */
-public class SceneryDetailAction extends ActionSupport {
-    private int sceneryId;
+public class SceneryAddAction extends ActionSupport implements SessionAware {
 
+    private int sceneryId;
 
     public int getSceneryId() {
         return sceneryId;
@@ -34,29 +34,31 @@ public class SceneryDetailAction extends ActionSupport {
         this.sceneryManager = sceneryManager;
     }
 
+    private Map<String, Object> session;
 
-    private Scenery scenery;
-
-
-    public Scenery getScenery() {
-        return scenery;
+    public Map<String, Object> getSession() {
+        return session;
     }
 
-    public void setScenery(Scenery scenery) {
-        this.scenery = scenery;
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
 
     @Override
     public String execute() throws Exception {
-        this.scenery = sceneryManager.loadById(sceneryId);
+
+        Scenery scenery = sceneryManager.loadById(sceneryId);
 
         if (scenery == null) {
-            HttpServletRequest request = ServletActionContext.getRequest();
-            request.getSession().setAttribute("error_message", "not found");
-
             return ERROR;
         } else {
+            Route route = (Route) session.get("route");
+
+            route.add(scenery);
+
+            session.put("route", route);
             return SUCCESS;
         }
 

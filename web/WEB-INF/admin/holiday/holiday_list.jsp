@@ -60,7 +60,7 @@
                     <s:property value="name"></s:property>
                 </s:iterator>
             <td>
-                <a href="<s:url namespace="/holiday" action="detail"></s:url>?holidayId=<s:property value="id"></s:property>">detail</a>
+                <a href="<s:url namespace="/admin/holiday" action="detail"></s:url>?holidayId=<s:property value="id"></s:property>">detail</a>
             </td>
         </tr>
     </s:iterator>

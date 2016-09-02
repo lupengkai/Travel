@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: tage
@@ -30,9 +31,37 @@
 </head>
 
 <body>
-<h1>
+
+<div>
+
+    <s:property value="#session.error_message"></s:property>
+    <s:set var="error_message" value="" scope="session"/>
 
 
-</h1>
+</div>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>detail</th>
+    </tr>
+    <s:iterator value="allSceneries">
+        <tr>
+            <td>
+                <s:property value="id"></s:property>
+            </td>
+            <td>
+                <s:property value="name"></s:property>
+            </td>
+            <td>
+                <a href="<s:url namespace="/scenery" action="detail"></s:url>?sceneryId=<s:property value="id"></s:property>">detail</a>
+            </td>
+        </tr>
+    </s:iterator>
+
+</table>
+
+<s:debug></s:debug>
 </body>
 </html>

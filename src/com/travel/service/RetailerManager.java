@@ -26,4 +26,7 @@ public class RetailerManager {
         return retailerDao.loadById(id);
     }
 
+    public List<Retailer> getAll() {
+        return retailerDao.getAll();
+    }
 }

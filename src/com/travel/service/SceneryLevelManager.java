@@ -19,7 +19,7 @@ public class SceneryLevelManager {
     }
 
     @Resource
-    public void setSceneryLevelDao(SceneryLevelDao documentTypeDao) {
+    public void setSceneryLevelDao(SceneryLevelDao sceneryLevelDao) {
         this.sceneryLevelDao = sceneryLevelDao;
     }
 

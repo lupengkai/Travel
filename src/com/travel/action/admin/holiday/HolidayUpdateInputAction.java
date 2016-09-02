@@ -1,19 +1,19 @@
-package com.travel.action.holiday;
+package com.travel.action.admin.holiday;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.model.Holiday;
-import com.travel.model.Retailer;
 import com.travel.service.HolidayManager;
-import com.travel.service.RetailerManager;
+import com.travel.session.Route;
+import com.travel.vo.HolidayInfo;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * Created by tage on 8/31/16.
+ * Created by tage on 9/1/16.
  */
-public class HolidayDetailAction extends ActionSupport {
+public class HolidayUpdateInputAction extends ActionSupport {
     private int holidayId;
 
 
@@ -25,14 +25,15 @@ public class HolidayDetailAction extends ActionSupport {
         this.holidayId = holidayId;
     }
 
-    private RetailerManager retailerManager;
 
-    public RetailerManager getRetailerManager() {
-        return retailerManager;
+    private HolidayInfo holidayInfo;
+
+    public HolidayInfo getHolidayInfo() {
+        return holidayInfo;
     }
 
-    public void setRetailerManager(RetailerManager retailerManager) {
-        this.retailerManager = retailerManager;
+    public void setHolidayInfo(HolidayInfo holidayInfo) {
+        this.holidayInfo = holidayInfo;
     }
 
     private HolidayManager holidayManager;
@@ -46,40 +47,19 @@ public class HolidayDetailAction extends ActionSupport {
     }
 
 
-    private Holiday holiday;
-
-
-    public Holiday getHoliday() {
-        return holiday;
-    }
-
-    public void setHoliday(Holiday holiday) {
-        this.holiday = holiday;
-    }
-
-    List<Retailer> retailers;
-
-    public List<Retailer> getRetailers() {
-        return retailers;
-    }
-
-    public void setRetailers(List<Retailer> retailers) {
-        this.retailers = retailers;
-    }
-
     @Override
     public String execute() throws Exception {
-        this.holiday = holidayManager.loadById(holidayId);
-
+        Holiday holiday = holidayManager.loadById(holidayId);
         if (holiday == null) {
             HttpServletRequest request = ServletActionContext.getRequest();
             request.getSession().setAttribute("error_message", "not found");
 
             return ERROR;
         } else {
+            this.holidayInfo = holidayManager.toHolidayInfo(holiday);
 
-            this.retailers = retailerManager.getAll();
             return SUCCESS;
+
         }
 
 

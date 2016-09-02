@@ -9,6 +9,9 @@ import com.travel.service.SceneryLevelManager;
 import com.travel.service.SceneryManager;
 import com.travel.service.SceneryTypeManager;
 import com.travel.vo.SceneryInfo;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by tage on 8/31/16.
@@ -39,6 +42,14 @@ public class SceneryDeleteAction extends ActionSupport {
 
 
     public String execute() {
+
+
+        Scenery scenery = sceneryManager.loadById(sceneryId);
+        if (scenery == null) {
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.getSession().setAttribute("error_message", "not found");
+            return ERROR;
+        }
 
 
         sceneryManager.deleteById(sceneryId);

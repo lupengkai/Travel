@@ -23,4 +23,12 @@ public class OrderItemManager {
     public void save(OrderItem orderItem) {
         orderItemDao.add(orderItem);
     }
+
+    public OrderItem loadById(int id) {
+        return orderItemDao.loadById(id);
+    }
+
+    public void deleteById(int id) {
+        orderItemDao.deleteById(id);
+    }
 }

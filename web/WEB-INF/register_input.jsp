@@ -57,7 +57,7 @@
     证件类型:
     <select name="documentType">
         <s:iterator value="allDocumentTypes">
-            <option value="<s:property value="id"/> "><s:property value="name"/></option>
+            <option value="<s:property value="id"/>"><s:property value="name"/></option>
         </s:iterator>
     </select><br/>
     证件号码:<input type="text" name="ID_number"> <br/>

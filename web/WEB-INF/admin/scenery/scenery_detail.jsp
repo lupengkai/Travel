@@ -23,5 +23,9 @@ level:<s:property value="scenery.level.name"></s:property><br/>
 type:<s:property value="scenery.type.name"></s:property><br/>
 
 
+<a href="<s:url namespace="/admin/scenery" action="update_input"></s:url>?sceneryId=<s:property value="scenery.id"></s:property>">update</a>
+<a href="<s:url namespace="/admin/scenery" action="delete"></s:url>?sceneryId=<s:property value="scenery.id"></s:property>">delete</a>
+
+
 </body>
 </html>

@@ -63,20 +63,14 @@
         </action>
 
         <action name="detail" class="com.travel.action.holiday.HolidayDetailAction">
-            <result>/WEB-INF/holiday/holiday_detail.jsp</result>
-        </action>
-
-        <action name="in" class="com.travel.action.holiday.HolidayAction" method="{1}">
-            <result name="success" type="redirectAction">
+            <result name="success">/WEB-INF/holiday/holiday_detail.jsp</result>
+            <result name="error" type="redirectAction">
                 <param name="namespace">/holiday</param>
-                <param name="actionName">detail</param>
-            </result>
-
-            <result name="login" type="redirectAction">
-                <param name="namespace">/</param>
-                <param name="actionName">login</param>
+                <param name="actionName">all</param>
             </result>
         </action>
+
+
     </package>
 
 
@@ -90,17 +84,48 @@
                 <param name="actionName">login</param>
             </result>
         </action>
+
+        <action name="add" class="com.travel.action.order.OrderAddAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/holiday</param>
+                <param name="actionName">detail</param>
+                <param name="holidayId">${holiday_id}</param>
+            </result>
+
+            <result name="login" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">login</param>
+            </result>
+        </action>
+
+        <action name="delete" class="com.travel.action.order.OrderDeleteAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/order</param>
+                <param name="actionName">all</param>
+            </result>
+
+            <result name="error" type="redirectAction">
+                <param name="namespace">/order</param>
+                <param name="actionName">all</param>
+            </result>
+        </action>
     </package>
 
 
     <package name="admin" namespace="/admin" extends="struts-default">
+        <action name="index">
+            <result>
+                /WEB-INF/admin/index.jsp
+            </result>
+        </action>
         <action name="login">
             <result>/WEB-INF/admin/login_input.jsp</result>
         </action>
 
-        <action name="login_in" class="com.travel.action.AdminLoginAction">
-            <result name="success">
-                /WEB-INF/admin/index.jsp
+        <action name="login_in" class="com.travel.action.admin.AdminLoginAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin</param>
+                <param name="actionName">index</param>
             </result>
             <result name="error" type="redirectAction">
                 <param name="namespace">/admin</param>
@@ -112,10 +137,168 @@
 
     <package name="scenery_admin" namespace="/admin/scenery" extends="struts-default">
 
+        <action name="all" class="com.travel.action.admin.scenery.SceneryListAction">
+            <result>/WEB-INF/admin/scenery/scenery_list.jsp</result>
+        </action>
+
+
+        <action name="input" class="com.travel.action.admin.scenery.SceneryAddInputAction">
+            <result>/WEB-INF/admin/scenery/scenery_add_input.jsp</result>
+        </action>
+
+        <action name="add" class="com.travel.action.admin.scenery.SceneryAddAction">
+            <result type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">all</param>
+            </result>
+            <result name="input" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">input</param>
+            </result>
+        </action>
+
+        <action name="detail" class="com.travel.action.admin.scenery.SceneryDetailAction">
+            <result name="success">/WEB-INF/admin/scenery/scenery_detail.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">all</param>
+            </result>
+        </action>
+
+        <action name="update_input" class="com.travel.action.admin.scenery.SceneryUpdateInputAction">
+            <result name="success">
+                /WEB-INF/admin/scenery/scenery_update_input.jsp
+            </result>
+
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">all</param>
+            </result>
+
+
+        </action>
+        <action name="update" class="com.travel.action.admin.scenery.SceneryUpdateAction">
+
+
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">detail</param>
+                <param name="sceneryId">${sceneryInfo.getId()}</param>
+
+            </result>
+
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">all</param>
+            </result>
+
+            <result name="input" type="chain">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">update_input</param>
+            </result>
+        </action>
+
+        <action name="delete" class="com.travel.action.admin.scenery.SceneryDeleteAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">all</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/scenery</param>
+                <param name="actionName">all</param>
+            </result>
+        </action>
+
+
     </package>
 
 
     <package name="holiday_admin" namespace="/admin/holiday" extends="struts-default">
+
+
+        <action name="all" class="com.travel.action.admin.holiday.HolidayListAction">
+            <result>/WEB-INF/admin/holiday/holiday_list.jsp</result>
+        </action>
+
+
+        <action name="input" class="com.travel.action.admin.holiday.HolidayAddInputAction">
+            <result>/WEB-INF/admin/holiday/holiday_add_input.jsp</result>
+        </action>
+
+        <action name="add" class="com.travel.action.admin.holiday.HolidayAddAction">
+            <result type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">all</param>
+            </result>
+            <result name="input" type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">input</param>
+            </result>
+            <result name="route" type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">scenery_list</param>
+            </result>
+        </action>
+
+        <action name="detail" class="com.travel.action.admin.holiday.HolidayDetailAction">
+            <result name="success">/WEB-INF/admin/holiday/holiday_detail.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">all</param>
+            </result>
+        </action>
+
+        <action name="update_input" class="com.travel.action.admin.holiday.HolidayUpdateInputAction">
+            <result name="success">
+                /WEB-INF/admin/holiday/holiday_update_input.jsp
+            </result>
+
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">all</param>
+            </result>
+
+
+        </action>
+        <action name="update" class="com.travel.action.admin.holiday.HolidayUpdateAction">
+
+
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">detail</param>
+                <param name="holidayId">${holidayInfo.getId()}</param>
+
+            </result>
+
+            <result name="error" type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">all</param>
+            </result>
+        </action>
+    </package>
+
+
+    <package name="route" namespace="/admin/holiday/route" extends="struts-default">
+        <action name="scenery_list" class="com.travel.action.admin.holiday.route.SceneryListAction">
+            <result>
+                /WEB-INF/admin/holiday/route/scenery_list.jsp
+            </result>
+        </action>
+
+        <action name="scenery_add" class="com.travel.action.admin.holiday.route.SceneryAddAction">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/admin/holiday/route</param>
+                <param name="actionName">scenery_list</param>
+            </result>
+        </action>
+
+        <action name="confirm" class="com.travel.action.admin.holiday.route.RouteAddAction">
+            <result type="redirectAction">
+                <param name="namespace">/admin/holiday</param>
+                <param name="actionName">add</param>
+            </result>
+        </action>
+
 
     </package>
 

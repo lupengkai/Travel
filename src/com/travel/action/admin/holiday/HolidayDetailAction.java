@@ -1,14 +1,11 @@
-package com.travel.action.holiday;
+package com.travel.action.admin.holiday;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.model.Holiday;
-import com.travel.model.Retailer;
 import com.travel.service.HolidayManager;
-import com.travel.service.RetailerManager;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Created by tage on 8/31/16.
@@ -25,15 +22,6 @@ public class HolidayDetailAction extends ActionSupport {
         this.holidayId = holidayId;
     }
 
-    private RetailerManager retailerManager;
-
-    public RetailerManager getRetailerManager() {
-        return retailerManager;
-    }
-
-    public void setRetailerManager(RetailerManager retailerManager) {
-        this.retailerManager = retailerManager;
-    }
 
     private HolidayManager holidayManager;
 
@@ -57,15 +45,6 @@ public class HolidayDetailAction extends ActionSupport {
         this.holiday = holiday;
     }
 
-    List<Retailer> retailers;
-
-    public List<Retailer> getRetailers() {
-        return retailers;
-    }
-
-    public void setRetailers(List<Retailer> retailers) {
-        this.retailers = retailers;
-    }
 
     @Override
     public String execute() throws Exception {
@@ -77,8 +56,6 @@ public class HolidayDetailAction extends ActionSupport {
 
             return ERROR;
         } else {
-
-            this.retailers = retailerManager.getAll();
             return SUCCESS;
         }
 

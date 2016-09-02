@@ -1,4 +1,4 @@
-package com.travel.action;
+package com.travel.action.admin;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;

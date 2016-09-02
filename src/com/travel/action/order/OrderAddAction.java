@@ -1,4 +1,4 @@
-package com.travel.action.holiday;
+package com.travel.action.order;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.model.Holiday;
@@ -9,15 +9,18 @@ import com.travel.service.HolidayManager;
 import com.travel.service.OrderItemManager;
 import com.travel.service.RetailerManager;
 import com.travel.service.UserManager;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 import java.util.Map;
 
 /**
  * Created by tage on 8/31/16.
  */
-public class HolidayAction extends ActionSupport implements SessionAware {
+public class OrderAddAction extends ActionSupport implements SessionAware {
 
     public int holiday_id;
     public int retailer_id;
@@ -83,7 +86,7 @@ public class HolidayAction extends ActionSupport implements SessionAware {
         this.session = session;
     }
 
-    public String in() {
+    public String execute() {
         User user = (User) session.get("user");
 
         if (user == null) {

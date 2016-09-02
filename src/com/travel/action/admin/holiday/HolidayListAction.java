@@ -1,4 +1,4 @@
-package com.travel.action.holiday;
+package com.travel.action.admin.holiday;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.model.Holiday;
